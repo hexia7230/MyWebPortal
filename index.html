@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シロナガスオオクラジア・ポータル | Kurazia</title>
+    
+    <!-- Meta Tags for SEO and Social Media -->
+    <meta name="description" content="Kuraziaの個人ポータルサイト。Skyrim SEモッド、勉強効率化ツール、Youtubeダウンローダー、制作中のゲームなどを公開しています。">
+    <meta name="author" content="Kurazia">
+    <meta name="keywords" content="Kurazia, Skyrim, モッド, 勉強ツール, Youtubeダウンローダー, ゲーム開発">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kurazia.com/">
+    <meta property="og:title" content="シロナガスオオクラジア・ポータル | Kurazia">
+    <meta property="og:description" content="Kuraziaの個人ポータルサイト。Skyrim SEモッド、勉強効率化ツール、Youtubeダウンローダー、制作中のゲームなどを公開しています。">
+    <meta property="og:image" content="https://kurazia.com/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kurazia.com/">
+    <meta property="twitter:title" content="シロナガスオオクラジア・ポータル | Kurazia">
+    <meta property="twitter:description" content="Kuraziaの個人ポータルサイト。Skyrim SEモッド、勉強効率化ツール、Youtubeダウンローダー、制作中のゲームなどを公開しています。">
+    <meta property="twitter:image" content="https://kurazia.com/og-image.jpg">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @keyframes rainbow-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px) rotate(-5deg); }
+            75% { transform: translateX(10px) rotate(5deg); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff, 0 0 60px #ffff00; }
+            33% { box-shadow: 0 0 20px #00ffff, 0 0 40px #ffff00, 0 0 60px #ff00ff; }
+            66% { box-shadow: 0 0 20px #ffff00, 0 0 40px #ff00ff, 0 0 60px #00ffff; }
+        }
+        
+        @keyframes slide-in {
+            from { transform: translateX(-100%) rotate(-20deg); opacity: 0; }
+            to { transform: translateX(0) rotate(0deg); opacity: 1; }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes color-shift {
+            0% { color: #ff0080; }
+            25% { color: #00ff80; }
+            50% { color: #0080ff; }
+            75% { color: #ff8000; }
+            100% { color: #ff0080; }
+        }
+        
+        @keyframes border-dance {
+            0% { border-color: #ff00ff; border-width: 3px; }
+            25% { border-color: #00ffff; border-width: 6px; }
+            50% { border-color: #ffff00; border-width: 3px; }
+            75% { border-color: #ff0080; border-width: 6px; }
+            100% { border-color: #ff00ff; border-width: 3px; }
+        }
+        
+        @keyframes text-glitch {
+            0%, 100% { text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff; }
+            50% { text-shadow: -2px 2px #00ffff, 2px -2px #ff00ff; }
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            background: linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ff1493, #00ff00, #8a2be2, #ff69b4);
+            background-size: 400% 400%;
+            animation: rainbow-bg 8s ease infinite;
+            min-height: 100vh;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 255, 255, 0.03) 2px,
+                rgba(255, 255, 255, 0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            border-radius: 50%;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ffff00, #ff00ff);
+            border-radius: 30%;
+            top: 70%;
+            left: 80%;
+            animation-delay: 1s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #00ff00, #0000ff);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            top: 50%;
+            left: 5%;
+            animation-delay: 2s;
+        }
+        
+        .shape:nth-child(4) {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #ff0080, #ffff00);
+            border-radius: 20%;
+            top: 20%;
+            left: 85%;
+            animation-delay: 1.5s;
+        }
+        
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 0 50px rgba(255, 0, 255, 0.8), 0 0 100px rgba(0, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border: 5px solid;
+            animation: border-dance 3s infinite, glow 4s infinite, shake 0.5s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: rotate 3s linear infinite;
+        }
+        
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00);
+            background-size: 200% 200%;
+            animation: rainbow-bg 2s ease infinite, pulse 1s infinite, bounce 2s infinite;
+            color: #000;
+            border: 4px solid #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 900;
+            text-transform: uppercase;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            z-index: 10;
+        }
+        
+        .lang-switch:hover {
+            animation: rainbow-bg 0.5s ease infinite, pulse 0.3s infinite, shake 0.2s infinite;
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            animation: text-glitch 0.3s infinite, color-shift 3s infinite;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            margin-top: 15px;
+            animation: color-shift 2s infinite;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, rgba(255, 0, 128, 0.9), rgba(0, 255, 255, 0.9), rgba(255, 255, 0, 0.9));
+            background-size: 200% 200%;
+            animation: rainbow-bg 4s ease infinite, float 3s ease-in-out infinite, glow 3s infinite;
+            border-radius: 25px;
+            padding: 35px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 6px solid;
+            border-image: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff) 1;
+            animation: rainbow-bg 4s ease infinite, float 3s ease-in-out infinite, glow 3s infinite, border-dance 2s infinite;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: rotate 4s linear infinite;
+        }
+        
+        .card:nth-child(1) { animation-delay: 0s; }
+        .card:nth-child(2) { animation-delay: 0.5s; }
+        .card:nth-child(3) { animation-delay: 1s; }
+        .card:nth-child(4) { animation-delay: 1.5s; }
+        
+        .card:hover {
+            animation: rainbow-bg 1s ease infinite, shake 0.3s infinite, pulse 0.5s infinite, glow 1s infinite;
+            transform: scale(1.1) rotate(2deg);
+            z-index: 10;
+        }
+        
+        .card h2 {
+            margin-bottom: 20px;
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: color-shift 3s infinite;
+            font-weight: 900;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card-icon {
+            font-size: 1.5em;
+            animation: rotate 3s linear infinite, pulse 1s infinite;
+            display: inline-block;
+        }
+        
+        .card p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+            background-size: 300% 300%;
+            animation: rainbow-bg 2s ease infinite, pulse 1.5s infinite, bounce 1s infinite;
+            color: #000;
+            text-decoration: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.6);
+            border: 4px solid #fff;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card-link:hover {
+            animation: rainbow-bg 0.5s ease infinite, shake 0.2s infinite, pulse 0.3s infinite;
+            transform: scale(1.2);
+        }
+        
+        .usage-steps {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 4px solid;
+            border-image: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff) 1;
+            animation: border-dance 3s infinite, glow 2s infinite;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .usage-steps h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            animation: color-shift 2s infinite;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        
+        .usage-steps ol {
+            margin-left: 25px;
+        }
+        
+        .usage-steps li {
+            margin: 12px 0;
+            font-weight: 600;
+            animation: color-shift 3s infinite;
+        }
+        
+        .usage-steps li::marker {
+            animation: color-shift 2s infinite;
+            font-weight: 900;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff0080, #ffff00, #00ff00, #ff0080);
+            background-size: 200% 200%;
+            animation: rainbow-bg 2s ease infinite, pulse 1s infinite, shake 0.5s infinite;
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 900;
+            margin-top: 15px;
+            border: 3px solid #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.1em;
+            animation: color-shift 3s infinite;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .lang-switch {
+                position: static;
+                display: block;
+                margin: 0 auto 20px;
+                width: fit-content;
+            }
+            
+            header {
+                padding: 30px 15px;
+            }
+            
+            .card h2 {
+                font-size: 1.5em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <button class="lang-switch" onclick="toggleLanguage()">
+                <span id="lang-text">English</span>
+            </button>
+            <h1 id="site-title">シロナガスオオクラジア・ポータル</h1>
+            <p class="subtitle" id="subtitle">★ KURAZIA ★</p>
+        </header>
+        
+        <div class="cards-grid">
+            <!-- Skyrim Mods Card -->
+            <div class="card">
+                <h2><span class="card-icon">🎮</span><span id="skyrim-title">Skyrim SEモッド</span></h2>
+                <p id="skyrim-desc">NexusModsで公開中のSkyrim Special Editionモッドコレクション</p>
+                <a href="https://next.nexusmods.com/profile/Kurazia/mods" target="_blank" class="card-link" id="skyrim-link">モッドを見る</a>
+            </div>
+            
+            <!-- Study Tool Card -->
+            <div class="card">
+                <h2><span class="card-icon">📚</span><span id="study-title">勉強効率化ツール</span></h2>
+                <p id="study-desc">学習効率を向上させるために開発したカスタム問題セット管理ツール</p>
+                <div class="usage-steps">
+                    <h3 id="usage-title">★ 使い方 ★</h3>
+                    <ol id="study-steps">
+                        <li>「Download Question Files」から好きな問題セットをダウンロード</li>
+                        <li>「Import」からダウンロードしたファイルを読み込むと開始できます</li>
+                    </ol>
+                </div>
+                <a href="https://hexia7230.github.io/StudyMod/" target="_blank" class="card-link" id="study-link">ツールを使う</a>
+            </div>
+            
+            <!-- YouTube Downloader Card -->
+            <div class="card">
+                <h2><span class="card-icon">📥</span><span id="yt-title">Youtubeダウンローダー</span></h2>
+                <p id="yt-desc">PC用の高速Youtubeダウンローダー。シンプルで使いやすいインターフェース</p>
+                <a href="https://hexia7230.github.io/SimpleYoutube/" target="_blank" class="card-link" id="yt-link">ダウンロードする</a>
+            </div>
+            
+            <!-- Game Project Card -->
+            <div class="card">
+                <h2><span class="card-icon">🕹️</span><span id="game-title">ヘブバン同人ゲーム</span></h2>
+                <p id="game-desc">制作中のRPGゲームプロジェクト</p>
+                <span class="badge" id="wip-badge">★ 開発中 ★</span>
+                <br><br>
+                <a href="https://hexia7230.github.io/RPG/" target="_blank" class="card-link" id="game-link">プレイする</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>★★★ &copy; 2024 KURAZIA ★★★ ALL RIGHTS RESERVED ★★★</p>
+        </footer>
+    </div>
+    
+    <script>
+        let currentLang = 'ja';
+        
+        const translations = {
+            ja: {
+                langText: '🌐 English',
+                siteTitle: 'シロナガスオオクラジア・ポータル',
+                subtitle: '★ KURAZIA ★',
+                skyrimTitle: 'Skyrim SEモッド',
+                skyrimDesc: 'NexusModsで公開中のSkyrim Special Editionモッドコレクション',
+                skyrimLink: 'モッドを見る',
+                studyTitle: '勉強効率化ツール',
+                studyDesc: '学習効率を向上させるために開発したカスタム問題セット管理ツール',
+                usageTitle: '★ 使い方 ★',
+                studySteps: [
+                    '「Download Question Files」から好きな問題セットをダウンロード',
+                    '「Import」からダウンロードしたファイルを読み込むと開始できます'
+                ],
+                studyLink: 'ツールを使う',
+                ytTitle: 'Youtubeダウンローダー',
+                ytDesc: 'PC用の高速Youtubeダウンローダー。シンプルで使いやすいインターフェース',
+                ytLink: 'ダウンロードする',
+                gameTitle: 'ヘブバン同人ゲーム',
+                gameDesc: '制作中のRPGゲームプロジェクト',
+                wipBadge: '★ 開発中 ★',
+                gameLink: 'プレイする',
+                footer: '★★★ &copy; 2024 KURAZIA ★★★ ALL RIGHTS RESERVED ★★★'
+            },
+            en: {
+                langText: '🌐 日本語',
+                siteTitle: 'SHIRONAGASU OOKURAZIA PORTAL',
+                subtitle: '★ KURAZIA ★',
+                skyrimTitle: 'SKYRIM SE MODS',
+                skyrimDesc: 'Collection of Skyrim Special Edition mods published on NexusMods',
+                skyrimLink: 'VIEW MODS',
+                studyTitle: 'STUDY TOOL',
+                studyDesc: 'Custom question set management tool developed to improve learning efficiency',
+                usageTitle: '★ HOW TO USE ★',
+                studySteps: [
+                    'Download your preferred question set from "Download Question Files"',
+                    'Import the downloaded file from "Import" to start'
+                ],
+                studyLink: 'USE TOOL',
+                ytTitle: 'YOUTUBE DOWNLOADER',
+                ytDesc: 'Fast YouTube downloader for PC with a simple and user-friendly interface',
+                ytLink: 'DOWNLOAD',
+                gameTitle: 'HEAVEN BURNS RED FAN GAME',
+                gameDesc: 'RPG game project in development',
+                wipBadge: '★ WORK IN PROGRESS ★',
+                gameLink: 'PLAY GAME',
+                footer: '★★★ &copy; 2024 KURAZIA ★★★ ALL RIGHTS RESERVED ★★★'
+            }
+        };
+        
+        function toggleLanguage() {
+            currentLang = currentLang === 'ja' ? 'en' : 'ja';
+            updateContent();
+        }
+        
+        function updateContent() {
+            const t = translations[currentLang];
+            
+            document.getElementById('lang-text').textContent = t.langText;
+            document.getElementById('site-title').textContent = t.siteTitle;
+            document.getElementById('subtitle').textContent = t.subtitle;
+            document.getElementById('skyrim-title').textContent = t.skyrimTitle;
+            document.getElementById('skyrim-desc').textContent = t.skyrimDesc;
+            document.getElementById('skyrim-link').textContent = t.skyrimLink;
+            document.getElementById('study-title').textContent = t.studyTitle;
+            document.getElementById('study-desc').textContent = t.studyDesc;
+            document.getElementById('usage-title').textContent = t.usageTitle;
+            document.getElementById('study-link').textContent = t.studyLink;
+            document.getElementById('yt-title').textContent = t.ytTitle;
+            document.getElementById('yt-desc').textContent = t.ytDesc;
+            document.getElementById('yt-link').textContent = t.ytLink;
+            document.getElementById('game-title').textContent = t.gameTitle;
+            document.getElementById('game-desc').textContent = t.gameDesc;
+            document.getElementById('wip-badge').textContent = t.wipBadge;
+            document.getElementById('game-link').textContent = t.gameLink;
+            document.querySelector('footer p').innerHTML = t.footer;
+            
+            const stepsList = document.getElementById('study-steps');
+            stepsList.innerHTML = '';
+            t.studySteps.forEach(step => {
+                const li = document.createElement('li');
+                li.textContent = step;
+                stepsList.appendChild(li);
+            });
+            
+            document.documentElement.lang = currentLang;
+        }
+    </script>
+</body>
+</html>
